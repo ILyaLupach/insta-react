@@ -1,4 +1,4 @@
-export default class InstaServices {
+export default class InstaService {
     constructor() {
         this._apiBase = 'http://localhost:3000'
     }
@@ -14,5 +14,18 @@ export default class InstaServices {
     getAllPosts = async () => {
         const res = await this.getResourse('/posts/')
         return await res;
+    }
+
+    getAllPhotos = async () => {
+        const res = await this.getResourse('/posts/')
+        return res.map(this._transformPost)
+    }
+
+    _transformPost = (post) => {
+        return {
+            src: post.src,
+            alt: post.alt,
+            id: post.id + "photo"
+        }
     }
 }
